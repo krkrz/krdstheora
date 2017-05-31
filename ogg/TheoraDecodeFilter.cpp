@@ -176,6 +176,7 @@ TheoraDecodeFilter::TheoraDecodeFilter()
 	m_theoraDecoder->initCodec();
 
     m_bmiHeight = m_bmiWidth = 0;
+	m_bmiSignedHeight = 0;
 }
 
 TheoraDecodeFilter::~TheoraDecodeFilter() 
@@ -424,6 +425,7 @@ void TheoraDecodeFilter::ComputeBmiFrameSize(const CMediaType* inOutputMediaType
     {
         VIDEOINFOHEADER2* locVideoHeader = (VIDEOINFOHEADER2*)inOutputMediaType->Format();
 
+		m_bmiSignedHeight = locVideoHeader->bmiHeader.biHeight;
         m_bmiHeight = (unsigned long)abs(locVideoHeader->bmiHeader.biHeight);
         m_bmiWidth = (unsigned long)abs(locVideoHeader->bmiHeader.biWidth);
 
@@ -433,6 +435,7 @@ void TheoraDecodeFilter::ComputeBmiFrameSize(const CMediaType* inOutputMediaType
     {
         VIDEOINFOHEADER* locVideoHeader = (VIDEOINFOHEADER*)inOutputMediaType->Format();
 
+		m_bmiSignedHeight = locVideoHeader->bmiHeader.biHeight;
         m_bmiHeight = (unsigned long)abs(locVideoHeader->bmiHeader.biHeight);
         m_bmiWidth = (unsigned long)abs(locVideoHeader->bmiHeader.biWidth);
 
@@ -858,8 +861,13 @@ void TheoraDecodeFilter::DecodeToRGB32_42x( yuv_buffer* inYUVBuffer, IMediaSampl
     unsigned char * ptrv = inYUVBuffer->v + (m_yOffset / 2) * inYUVBuffer->uv_stride;
     unsigned char * ptro = locBuffer;
 
-	int stride = -(int)m_bmiWidth * 4;
-	ptro += (m_pictureHeight-1)*m_bmiWidth * 4;
+	int stride;
+	if( m_bmiSignedHeight < 0 ) {
+		stride = (int)m_bmiWidth * 4;
+	} else {
+		stride = -(int)m_bmiWidth * 4;
+		ptro += ( m_pictureHeight - 1 )*m_bmiWidth * 4;
+	}
 
     for (unsigned long i = 0; i < m_pictureHeight; i++) 
     {
@@ -916,8 +924,13 @@ void TheoraDecodeFilter::DecodeToRGB32_444( yuv_buffer* inYUVBuffer, IMediaSampl
     unsigned char * ptrv = inYUVBuffer->v + m_yOffset * inYUVBuffer->uv_stride;
     unsigned char * ptro = locBuffer;
 	
-	int stride = -(int)m_bmiWidth * 4;
-	ptro += (m_pictureHeight-1)*m_bmiWidth * 4;
+	int stride;
+	if( m_bmiSignedHeight < 0 ) {
+		stride = (int)m_bmiWidth * 4;
+	} else {
+		stride = -(int)m_bmiWidth * 4;
+		ptro += ( m_pictureHeight - 1 )*m_bmiWidth * 4;
+	}
     for (unsigned long i = 0; i < m_pictureHeight; i++) 
     {
         unsigned char* ptro2 = ptro;

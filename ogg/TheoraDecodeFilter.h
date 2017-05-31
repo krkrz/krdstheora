@@ -130,6 +130,7 @@ protected:
 protected:
     static const unsigned long THEORA_IDENT_HEADER_SIZE = 42;
 
+	int m_bmiSignedHeight;
     unsigned long m_bmiHeight;
 	unsigned long m_bmiWidth;
 	unsigned long m_bmiFrameSize;

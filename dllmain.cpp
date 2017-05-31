@@ -14,15 +14,16 @@
 #pragma comment (lib, "strmiids")
 #pragma comment (lib, "quartz")
 
-#pragma comment (lib, "libogg_static")
-#pragma comment (lib, "libtheora_static")
-#pragma comment (lib, "libvorbis_static")
+// プロジェクト参照に追加する方式でリンクに変更
+//#pragma comment (lib, "libogg_static")
+//#pragma comment (lib, "libtheora_static")
+//#pragma comment (lib, "libvorbis_static")
 
-#ifdef _DEBUG
-#pragma comment (lib, "strmbasd")
-#else
-#pragma comment (lib, "strmbase")
-#endif
+//#ifdef _DEBUG
+//#pragma comment (lib, "strmbasd")
+//#else
+//#pragma comment (lib, "strmbase")
+//#endif
 
 
 const GUID MEDIASUBTYPE_Ogg = 
