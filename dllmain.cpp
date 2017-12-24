@@ -14,7 +14,7 @@
 #pragma comment (lib, "strmiids")
 #pragma comment (lib, "quartz")
 
-// ƒvƒƒWƒFƒNƒgQÆ‚É’Ç‰Á‚·‚é•û®‚ÅƒŠƒ“ƒN‚É•ÏX
+// ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå‚ç…§ã«è¿½åŠ ã™ã‚‹æ–¹å¼ã§ãƒªãƒ³ã‚¯ã«å¤‰æ›´
 //#pragma comment (lib, "libogg_static")
 //#pragma comment (lib, "libtheora_static")
 //#pragma comment (lib, "libvorbis_static")
@@ -49,7 +49,7 @@ BOOL APIENTRY DllMain( HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpRese
 static tjs_int GlobalRefCountAtInit = 0;
 extern "C" HRESULT _stdcall V2Link(iTVPFunctionExporter *exporter)
 {
-	// ƒXƒ^ƒu‚Ì‰Šú‰»(•K‚¸‹Lq‚·‚é)
+	// ã‚¹ã‚¿ãƒ–ã®åˆæœŸåŒ–(å¿…ãšè¨˜è¿°ã™ã‚‹)
 	TVPInitImportStub(exporter);
 
 	TVPRegisterDSVideoCodec( TJS_W(".ogg"), (void*)&MEDIASUBTYPE_Ogg, tTVPCreateOggFilter, tTVPCreateTheoraFilter, tTVPCreateVorbisFilter, NULL );
@@ -64,7 +64,7 @@ extern "C" HRESULT _stdcall V2Unlink() {
 	TVPUnregisterDSVideoCodec( TJS_W(".ogg"), (void*)&MEDIASUBTYPE_Ogg, tTVPCreateOggFilter, tTVPCreateTheoraFilter, tTVPCreateVorbisFilter, NULL );
 	TVPUnregisterDSVideoCodec( TJS_W(".ogv"), (void*)&MEDIASUBTYPE_Ogg, tTVPCreateOggFilter, tTVPCreateTheoraFilter, tTVPCreateVorbisFilter, NULL );
 
-	// ƒXƒ^ƒu‚Ìg—pI—¹(•K‚¸‹Lq‚·‚é)
+	// ã‚¹ã‚¿ãƒ–ã®ä½¿ç”¨çµ‚äº†(å¿…ãšè¨˜è¿°ã™ã‚‹)
 	TVPUninitImportStub();
 	return S_OK;
 }

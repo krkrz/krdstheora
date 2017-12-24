@@ -217,7 +217,7 @@ OggDataBuffer::eProcessResult OggDataBuffer::processBaseHeader()
 
 		//Make a local buffer for the header
 		unsigned char* locBuff = new unsigned char[OggPageHeader::OGG_BASE_HEADER_SIZE];		//deleted before this function returns
-		// �z��Ȃ̂ŁAauto_ptr�g��Ȃ������������A�g�ݍ��ݕ��Ȃ̂ŋC�ɂ��Ȃ����Ƃɂ���
+		// 配列なので、auto_ptr使わない方がいいが、組み込み方なので気にしないことにする
 		auto_ptr<unsigned char> lb(locBuff);
 		
 		// LOG(logDEBUG1) << "ProcessBaseHeader : Reading from stream...";
